@@ -1,0 +1,62 @@
+{
+  "dirs": {
+    "output": ".",
+    "model": "trained_models",
+    "ensemble": "ensemble_models",
+    "rl_ensemble": "rl_ensemble_models",
+    "results": "results"
+  },
+  "data": {
+    "train_start": "2010-01-01",
+    "train_end": "2024-12-31",
+    "trade_start": "2025-01-01",
+    "trade_end": "2025-12-31"
+  },
+  "tickers": [
+    "AXP", "AMGN", "AAPL", "BA", "CAT", "CSCO", "CVX", "GS", "HD", "HON",
+    "IBM", "INTC", "JNJ", "JPM", "KO", "MCD", "MMM", "MRK", "MSFT", "NKE",
+    "PG", "TRV", "UNH", "V", "VZ", "WMT", "XOM"
+  ],
+  "trading": {
+    "stock_dim": 5,
+    "initial_balance": 10000,
+    "commission": 0.001
+  },
+  "rl": {
+    "total_timesteps": 10000,
+    "n_steps": 256,
+    "batch_size": 128,
+    "learning_rate": 1e-4,
+    "num_cpu": 16,
+    "use_gpu": false,
+    "policy": "MlpPolicy",
+    "algorithm": "A2C"
+  },
+  "ml": {
+    "rf_n_estimators": 150,
+    "rf_max_depth": 12,
+    "gb_n_estimators": 150,
+    "gb_max_depth": 6,
+    "label_threshold": 0.005,
+    "ensemble_weights": {"rf": 0.6, "gb": 0.4}
+  },
+  "features": {
+    "trading": ["close", "rsi_14", "macd", "macds", "macdh", "bb_upper", "bb_lower", "adx", "minus_di", "plus_di", "mom_10"],
+    "ml": [
+      "close", "volume", "rsi_14", "macd", "macds", "macdh",
+      "bb_upper", "bb_lower", "sma_5", "sma_10", "sma_20", "sma_30", "vix", "turbulence",
+      "adx", "minus_di", "plus_di", "cci", "mom_10", "roc_10", "obv"
+    ]
+  },
+  "indicators": {
+    "rsi": {"timeperiod": 14},
+    "macd": {"fastperiod": 12, "slowperiod": 26, "signalperiod": 9},
+    "bb": {"timeperiod": 20, "nbdevup": 2, "nbdevdn": 2},
+    "adx": {"timeperiod": 14},
+    "cci": {"timeperiod": 20},
+    "mom": {"timeperiod": 10},
+    "roc": {"timeperiod": 10},
+    "sma_windows": [5, 10, 20, 30, 60],
+    "turbulence_lookback": 20
+  }
+}

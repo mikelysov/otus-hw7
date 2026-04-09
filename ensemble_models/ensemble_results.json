@@ -1,0 +1,6 @@
+{
+  "rf_accuracy": 0.5185185185185185,
+  "gb_accuracy": 0.5191256830601093,
+  "ensemble_accuracy": 0.5221615057680632,
+  "weighted_accuracy": 0.5238312082574378
+}
