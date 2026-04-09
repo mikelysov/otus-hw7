@@ -20,13 +20,13 @@
   "trading": {
     "stock_dim": 5,
     "initial_balance": 10000,
-    "commission": 0.001
+    "commission": 0.0003
   },
   "rl": {
-    "total_timesteps": 10000,
-    "n_steps": 256,
-    "batch_size": 128,
-    "learning_rate": 1e-4,
+    "total_timesteps": 50000,
+    "n_steps": 512,
+    "batch_size": 256,
+    "learning_rate": 3e-4,
     "num_cpu": 16,
     "use_gpu": false,
     "policy": "MlpPolicy",

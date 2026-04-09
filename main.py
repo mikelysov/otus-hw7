@@ -1,5 +1,5 @@
 """
-ДЗ №7: Финальный ансамбль - Единая точка входа
+ДЗ 7: Финальный ансамбль - Единая точка входа
 Usage: python main.py [command]
 
 Commands:
@@ -53,7 +53,7 @@ def run_all():
 
 
 def main():
-    parser = argparse.ArgumentParser(description="ДЗ №7: Финальный ансамбль")
+    parser = argparse.ArgumentParser(description="ДЗ 7: Финальный ансамбль")
     parser.add_argument(
         "command",
         nargs="?",
@@ -63,7 +63,7 @@ def main():
     )
     args = parser.parse_args()
 
-    print(f"ДЗ №7: Финальный ансамбль - Команда: {args.command}")
+    print(f"ДЗ 7: Финальный ансамбль - Команда: {args.command}")
 
     if args.command == "all":
         return run_all()

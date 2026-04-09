@@ -1,5 +1,5 @@
 """
-ДЗ №7: Финальный ансамбль - Создание ML ансамбля
+ДЗ 7: Финальный ансамбль - Создание ML ансамбля
 """
 
 import os
@@ -37,7 +37,7 @@ def create_labels(df, threshold=LABEL_THRESHOLD):
 
 def main():
     logger.info("=" * 60)
-    logger.info("ДЗ №7: Финальный ансамбль - Создание ML ансамбля")
+    logger.info("ДЗ 7: Финальный ансамбль - Создание ML ансамбля")
 
     train_df, trade_df = load_data(OUTPUT_DIR)
     feature_cols = [f for f in FEATURES["ml"] if f in train_df.columns]

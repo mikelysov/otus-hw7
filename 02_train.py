@@ -1,5 +1,5 @@
 """
-ДЗ №7: Финальный ансамбль - Обучение RL модели
+ДЗ 7: Финальный ансамбль - Обучение RL модели
 Многопроцессорное обучение с SubprocVecEnv
 """
 
@@ -38,7 +38,7 @@ from trading_env import StockTradingEnv
 
 def main():
     logger.info("=" * 60)
-    logger.info("ДЗ №7: Финальный ансамбль - Обучение RL модели")
+    logger.info("ДЗ 7: Финальный ансамбль - Обучение RL модели")
     logger.info(f"Используем {NUM_CPU} процессов")
 
     np.random.seed(42)
@@ -47,7 +47,15 @@ def main():
 
     device = "cuda" if USE_GPU else "cpu"
     env_kwargs = get_env_kwargs(
-        df=trade_df,
+        df=train_df,  # Train on train data
+        stock_dim=STOCK_DIM,
+        initial_amount=INITIAL_BALANCE,
+        commission=COMMISSION,
+        tech_indicator_list=FEATURES["trading"],
+    )
+
+    eval_env_kwargs = get_env_kwargs(
+        df=trade_df,  # Evaluate on trade data
         stock_dim=STOCK_DIM,
         initial_amount=INITIAL_BALANCE,
         commission=COMMISSION,
@@ -66,14 +74,14 @@ def main():
         f"Observation: {vec_env.observation_space}, Action: {vec_env.action_space}"
     )
 
-    eval_env = make_vec_env(StockTradingEnv, n_envs=1, env_kwargs=env_kwargs)
+    eval_env = make_vec_env(StockTradingEnv, n_envs=1, env_kwargs=eval_env_kwargs)
 
-    MODEL_PATH = os.path.join(MODEL_DIR, "ppo_stock_trading")
+    model_path = os.path.join(MODEL_DIR, f"{RL_ALGORITHM.lower()}_stock_trading")
 
     callbacks = [
         EvalCallback(
             eval_env,
-            best_model_save_path=MODEL_DIR,
+            best_model_save_path=model_path.rsplit("/", 1)[0],
             n_eval_episodes=3,
             deterministic=True,
         ),
@@ -105,10 +113,10 @@ def main():
         )
 
     model.learn(total_timesteps=TOTAL_TIMESTEPS, callback=callbacks, progress_bar=True)
-    model.save(MODEL_PATH)
-    model_size = Path(MODEL_PATH + ".zip").stat().st_size / 1024 / 1024
+    model.save(model_path)
+    model_size = Path(model_path + ".zip").stat().st_size / 1024 / 1024
 
-    logger.info(f"Готово! Модель: {MODEL_PATH}.zip ({model_size:.2f} MB)")
+    logger.info(f"Готово! Модель: {model_path}.zip ({model_size:.2f} MB)")
     logger.info("=" * 60)
 
 

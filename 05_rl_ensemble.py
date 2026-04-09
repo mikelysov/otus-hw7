@@ -1,5 +1,5 @@
 """
-ДЗ №7: Финальный ансамбль - RL на вершине ML ансамбля
+ДЗ 7: Финальный ансамбль - RL на вершине ML ансамбля
 """
 
 import os
@@ -35,7 +35,7 @@ from trading_env import StockTradingEnvWithEnsemble
 
 def main():
     logger.info("=" * 60)
-    logger.info("ДЗ №7: Финальный ансамбль - RL на вершине ML ансамбля")
+    logger.info("ДЗ 7: Финальный ансамбль - RL на вершине ML ансамбля")
     logger.info(f"Используем {NUM_CPU} процессов")
 
     train_df, trade_df = load_data(OUTPUT_DIR)

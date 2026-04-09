@@ -1,5 +1,5 @@
 """
-ДЗ №7: Финальный ансамбль - Бектест и оценка качества RL модели
+ДЗ 7: Финальный ансамбль - Бектест и оценка качества RL модели
 """
 
 import os
@@ -13,11 +13,12 @@ from config import (
     INITIAL_BALANCE,
     COMMISSION,
     FEATURES,
+    RL_ALGORITHM,
 )
 from utils import logger, load_data, get_env_kwargs, calculate_metrics
 
 import numpy as np
-from stable_baselines3 import PPO
+from stable_baselines3 import PPO, A2C
 from trading_env import StockTradingEnv
 
 
@@ -56,14 +57,18 @@ def run_benchmark(env, initial_balance):
 
 def main():
     logger.info("=" * 60)
-    logger.info("ДЗ №7: Финальный ансамбль - Бектест")
+    logger.info("ДЗ 7: Финальный ансамбль - Бектест")
 
     train_df, trade_df = load_data(OUTPUT_DIR)
     logger.info(f"Train: {len(train_df)} rows, Trade: {len(trade_df)} rows")
 
+    model_path = os.path.join(MODEL_DIR, f"{RL_ALGORITHM.lower()}_stock_trading")
     try:
-        model = PPO.load(os.path.join(MODEL_DIR, "ppo_stock_trading"))
-        logger.info("Модель загружена")
+        if RL_ALGORITHM == "A2C":
+            model = A2C.load(model_path)
+        else:
+            model = PPO.load(model_path)
+        logger.info(f"Модель загружена: {model_path}")
     except Exception as e:
         logger.error(f"Ошибка загрузки модели: {e}")
         return

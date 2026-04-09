@@ -1,5 +1,5 @@
 """
-ДЗ №7: Финальный ансамбль с RL
+ДЗ 7: Финальный ансамбль с RL
 Загружает данные, добавляет технические индикаторы и разбивает на train/test
 """
 
@@ -167,7 +167,7 @@ def calculate_turbulence(df, lookback=20):
 
 if __name__ == "__main__":
     logger.info("=" * 60)
-    logger.info("ДЗ №7: Финальный ансамбль - Загрузка и обработка данных")
+    logger.info("ДЗ 7: Финальный ансамбль - Загрузка и обработка данных")
     logger.info(f"Загрузка DOW 30 ({len(DOW_30_TICKERS)} тикеров)")
     logger.info(f"Период: {TRAIN_START} - {TRADE_END}")
 
